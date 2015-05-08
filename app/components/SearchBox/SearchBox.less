@@ -1,0 +1,37 @@
+@import "./../../../node_modules/material-ui/src/less/variables/colors.less";
+
+.search-box {
+	align-self: center;
+
+	.fa {
+		color: #ffffff;
+		font-size: 20px;
+		margin-left: 30px;
+	}
+
+	.typeahead {
+		font-size: 16px;
+		font-family: 'Roboto', sans-serif;
+		border: none;
+		background: rgba(0,0,0,0);
+		color: #fff;
+
+
+	}
+
+	*::-webkit-input-placeholder {
+    	color: @grey-50;
+	}
+	*:-moz-placeholder {
+	    /* FF 4-18 */
+	    color: @grey-50;
+	}
+	*::-moz-placeholder {
+	    /* FF 19+ */
+	    color: @grey-50;
+	}
+	*:-ms-input-placeholder {
+	    /* IE 10+ */
+	    color: @grey-50;
+	}
+}
