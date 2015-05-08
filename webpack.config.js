@@ -8,7 +8,7 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.css$/, loader: "style!css" },
-            { test: /\.less$/, loader: "style!css!less!autoprefixer-loader"},
+            { test: /\.less$/, loader: "style!css!autoprefixer-loader!less"},
             { test: /\.png$/, loader: "url?limit=10000&mimetype=image/png" },
             { test: /\.svg/, loader: "url?limit=10000&mimetype=image/svg+xml" },
             { test: /\.jsx$/, loader: "traceur?sourceMaps=true&runtime=true!jshint-loader!jsx-loader", exclude: [/node_modules/, /dist/] },

@@ -1,9 +1,9 @@
 'use strict';
 
-let React = require('react');
-let mui = require('material-ui');
-let classSet = require('classSet');
-let Paper = mui.Paper;
+let React    = require('react');
+let mui      = require('material-ui');
+let classSet = require('classset');
+let Paper    = mui.Paper;
 
 require('./MoviePreview.less');
 

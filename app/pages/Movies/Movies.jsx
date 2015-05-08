@@ -3,7 +3,8 @@
 let React = require('react');
 
 let MoviePreview = require("./../../components/MoviePreview/MoviePreview.jsx");
-
+let AddMovieBlock = require("./../../components/AddMovieBlock/AddMovieBlock.jsx");
+let AddMovieForm = require("./../../components/AddMovieForm/AddMovieForm.jsx");
 
 let FluxMixin = require('fluxxor').FluxMixin(React);
 let StoreWatchMixin = require('fluxxor').StoreWatchMixin;
@@ -30,7 +31,7 @@ let Movies = React.createClass({
 
 	getMovies() {
 		if (this.state.movies.length === 0) {
-			return <p> There are no movies  </p>;
+			return <p className="no-movies-found"> There are no movies found </p>;
 		}
 
 		return this.state.movies.map( (movie) => {
@@ -43,24 +44,32 @@ let Movies = React.createClass({
 		});
 	},
 
+	showAddMovieForm() {
+		
+	},
+
 	getMovieFormComponent() {
-		var formHahs = {
+
+
+		let formHash = {
 			"addMovie": <RouteHandler flux={this.props.flux} />
 		};
-		if (formHahs[this.getParams().params]) {
-			return formHahs[this.getParams().params];
+		if (formHash[this.getParams().params]) {
+			return formHash[this.getParams().params];
 		} else {
-			return <div />;
+			return <AddMovieBlock onClick={this.showAddMovieForm}/>;
 		}
 	},
 
 	render() {
 		let movies = this.getMovies();
 		let addMovie = this.getMovieFormComponent();
-		return <div className="movies">
-					{addMovie}
+		return <div className="movies">	
+					<AddMovieForm movie={false}/>		
 					{movies}
-					<div className="clearfix"></div>	
+					
+					<div className="clearfix"></div>
+					{addMovie}	
 			   </div>;
 	}
 });
