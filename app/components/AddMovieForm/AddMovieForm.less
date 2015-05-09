@@ -1,0 +1,70 @@
+.add-movie-form-container {
+	max-width: 700px;
+	min-width: 270px;
+	margin-left: 20px;
+	margin-right: 20px;
+	background-color: #FAFAFA;
+	min-height: 400px;
+
+}
+
+#add-movie-form {
+	padding: 30px 40px;
+
+	.form-label {
+		width: 100%;
+		display: block;
+		font-weight: 700;
+		font-size: 17px;
+		color: #E91E63;
+		padding-top: 20px;
+		padding-bottom: 20px;
+
+	}
+
+	.form-group {
+
+		display: flex;
+		jusify-content: space-between;
+
+		.left-label {
+			align-self: flex-end;
+			display: block;
+			line-height: 40px;
+			font-size: 14px;
+			font-weight: 500;
+			width: 120px;
+		}
+
+		@media (max-width: 500px) {
+			.left-label {
+				display: none;
+			}
+			.add-movie-field {
+				min-width: 150px;
+				max-width: 300px;
+				font-size: 16px;
+	  			height: 50px;
+			}
+		}
+
+		.add-movie-field {
+			width: 200px;
+			font-size: 16px;
+  			height: 50px;
+		}
+
+		.mui-drop-down-menu {
+			right: 26px;
+			height: 45px;
+		}
+
+	}
+
+	.file-input {
+		margin-top: 20px;
+	}
+
+	
+}
+
