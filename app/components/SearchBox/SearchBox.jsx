@@ -1,13 +1,16 @@
 'use strict';
 
 let React = require('react');
+let ReactRouter = require('react-router');
 let FluxMixin = require('fluxxor').FluxMixin(React);
 
 require('./SearchBox.less');
 
 let SearchBox = React.createClass({
 
-	mixins: [FluxMixin],
+	mixins: [FluxMixin,
+             ReactRouter.Navigation,
+             ReactRouter.State],
 
 	inizializeQuerySearch() {
         let self = this;
@@ -18,9 +21,9 @@ let SearchBox = React.createClass({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             remote: {
-                url: baseUrl + self.getQuery(),
+                url: baseUrl + self.getTypeAheadQuery(),
                 replace:  () => { 
-                    return baseUrl + self.getQuery();
+                    return baseUrl + self.getTypeAheadQuery();
                 },
                 filter: (data) => {
                 	var searchQuery = data.map((movie) => { 
@@ -49,14 +52,16 @@ let SearchBox = React.createClass({
             displayKey: 'value',
             source: states.ttAdapter()
         }).on('keyup', () => {
-           if (this.getQuery() === '') {
+           if (this.getTypeAheadQuery() === '') {
                 self.getFlux().actions.movieActions.searchMoviesEnd();
            }
             
+        }).on('unfocus', () => {
+            this.addClass('hidden');
         });
     },
 
-    getQuery() {
+    getTypeAheadQuery() {
         var query = $('.typeahead.tt-input').typeahead('val');
 
     	return query;
@@ -67,12 +72,16 @@ let SearchBox = React.createClass({
     },
 
     searchClick() {
+        if (!this.isActive('movies')) {
+            this.context.router.transitionTo('movies');
+        }
         $('.typeahead').toggleClass('hidden');
+        $('.typeahead.tt-input').focus();
     },
 
 	render() {
 		return  <div className="search-box">
-					<input className="typeahead hidden" type="text" placeholder="Search" />
+					<input className="typeahead hidden" type="text" placeholder="Search"/>
 					<i className="fa fa-search" onClick={this.searchClick}></i>
 				</div>;
 	}

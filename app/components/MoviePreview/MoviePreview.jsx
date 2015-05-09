@@ -27,11 +27,15 @@ let MoviePreview = React.createClass({
 	},
 
 	render() {
+		let linkTo = "/movies/"+this.props.movie._id;
 		return  <Paper zDepth={1} className="movie-preview" >
-					<h3> {this.props.movie.title} </h3>
-					  <small> {this.props.movie.year}</small>
-					<p> <strong> Format:</strong> {this.props.movie.format} </p>
-					<div className="actors-collapsed hidden"> {this.displayActors()}</div>
+					<div className="heading">
+						<h3> {this.props.movie.title} </h3>
+					</div>
+					<h5> {this.props.movie.format} </h5>
+
+					<p onClick={this.onClick}>Discover more</p>
+					
 					
 					<i className="fa fa-times" onClick={this.deleteItem}></i>
 		 		</Paper>;
