@@ -7,9 +7,12 @@ let MovieStore = Fluxxor.createStore({
 	initialize() {
 		this.movies = [];
 		this.searchMovies = null;
+		this.movieDetails = {};
+		this.movieFullDetails = {};
 		this.bindActions(Constants.SERVER.MOVIE_LIST, this.handleMovies,
 						 Constants.SERVER.SEARCH_MOVIES, this.handleSearchMovies,
-						 Constants.SERVER.SEARCH_END, this.handleSearchEnd);
+						 Constants.SERVER.SEARCH_END, this.handleSearchEnd,
+						 Constants.SERVER.GET_MOVIE, this.handleMovieDetails);
 	},
 
 	handleSearchEnd() {
@@ -18,8 +21,12 @@ let MovieStore = Fluxxor.createStore({
 	},
 
 	handleMovies(movies) {
-		console.log(movies);
 		this.movies = movies;
+		this.emit('change');
+	},
+
+	handleMovieDetails(movie) {
+		this.movieDetails = movie;
 		this.emit('change');
 	},
 
@@ -29,12 +36,16 @@ let MovieStore = Fluxxor.createStore({
 	},
 
 	getMovies() {
-		console.log("get", this.movies);
 		if (this.searchMovies) {
 			return this.searchMovies;
 		}
 		return this.movies;
+	},
+
+	getMovieDetails() {
+		return this.movieDetails;
 	}
+	
 });
 
 module.exports = MovieStore;

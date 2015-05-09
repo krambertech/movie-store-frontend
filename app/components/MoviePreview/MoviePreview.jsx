@@ -4,22 +4,36 @@ let React    = require('react');
 let mui      = require('material-ui');
 let classSet = require('classset');
 let Paper    = mui.Paper;
+let FlatButton    = mui.FlatButton;
+
 
 require('./MoviePreview.less');
 
 let MoviePreview = React.createClass({
+
+	onClick() {
+		this.props.onClick(this.props.movie._id);
+	},
+
+	displayActors() {
+		return this.props.movie.actors.map(actor => {
+			return <span>{actor.name} {actor.surname}, </span>;
+		})
+	},
+
+	deleteItem() {
+		console.debug('delete');
+		this.props.onDelete(this.props.movie._id);
+	},
+
 	render() {
-		let movie = this.props.movie;
-		let mainClasses = classSet({
-			"movie-preview": this.props.state == "small",
-			"movie-details": this.props.state == "big",
-			"movie-block": true,	
-		});
-		console.info(mainClasses, this.props.state);
-		return  <Paper zDepth={1} className={mainClasses}>
-					<h3> {movie.title} </h3>
-					<h4> {movie.year} </h4>
-					<p> <strong> Format:</strong> {movie.format} </p>
+		return  <Paper zDepth={1} className="movie-preview" >
+					<h3> {this.props.movie.title} </h3>
+					  <small> {this.props.movie.year}</small>
+					<p> <strong> Format:</strong> {this.props.movie.format} </p>
+					<div className="actors-collapsed hidden"> {this.displayActors()}</div>
+					
+					<i className="fa fa-times" onClick={this.deleteItem}></i>
 		 		</Paper>;
 	}
 });

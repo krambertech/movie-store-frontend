@@ -66,14 +66,14 @@ let SearchBox = React.createClass({
     	this.inizializeQuerySearch();
     },
 
-    componentDidUpdate() {
-    	this.inizializeQuerySearch();
+    searchClick() {
+        $('.typeahead').toggleClass('hidden');
     },
 
 	render() {
 		return  <div className="search-box">
-					<input className="typeahead" type="text" placeholder="Search" />
-					<i className="fa fa-search"></i>
+					<input className="typeahead hidden" type="text" placeholder="Search" />
+					<i className="fa fa-search" onClick={this.searchClick}></i>
 				</div>;
 	}
 });

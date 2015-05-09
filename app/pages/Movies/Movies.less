@@ -1,8 +1,14 @@
 .movies {
 	width: 100%;
-	heigth: 100%;
 	max-width: 900px;
 	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: flex-start;
+	align-content: space-between;
+	background-color: #eeeeee;
 
 	.no-movies-found {
 		text-align: center;
@@ -10,8 +16,13 @@
 		font-size: 20px;
 		padding-top: 40px;
 	}
-}
 
-.clearfix {
-	clear: both;
+	.movie-enter {
+	  opacity: 0.01;
+	  transition: opacity .5s ease-in;
+	}
+
+	.movie-enter.movie-enter-active {
+	  opacity: 1;
+	}
 }

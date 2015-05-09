@@ -1,15 +1,39 @@
 @import "./../../../node_modules/material-ui/src/less/components/paper.less";
 
-.movie-block {
-	width: 200px;
+.movie-preview {
+	max-width: 250px;
+	width:250px;
 	height:200px;
 	margin: 0;
 	margin-top: 20px;
-	margin-left: 20px;
-	float: left;
 	font-family: 'Roboto';
 	background-color: #ffffff;
 	text-align: center;
+	flex-grow: 2;
+	margin: 20px 20px 0;
+	position:relative;
+
+	.fa {
+		position: absolute;
+		top: 4px;
+		right: 4px;
+		font-size: 17px;
+		color: #bbbbbb;
+		cursor: pointer;
+		display:none;
+	}
+	.fa:hover{
+		color: #E91E63;
+	}
+
+	h3 {
+
+		small {
+			color: #9E9E9E;
+			font-weight: 500;
+		}
+	}
+
 
 }
 
@@ -18,11 +42,17 @@
     & > .mui-z-depth-bottom {
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19);
     }
-}
 
-.movie-preview {
-	h3 {
-		text-align: center;
-		
+	.fa {
+		display: block;
 	}
 }
+
+@media (max-width: 500px) {
+  .movie-preview {
+  	width: 100%;
+  	max-width: none;
+  }
+}
+
+
