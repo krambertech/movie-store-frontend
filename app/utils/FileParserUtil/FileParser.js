@@ -1,6 +1,6 @@
 'use strict';
 
-let validator = require('./../ValidationUtil/')
+let validator = require('./../ValidationUtil/');
 
 class FileParser {
 	
@@ -30,49 +30,75 @@ class FileParser {
 	parse(text) {
 		let lines = text.split(/\n/);
 		let movies = [];
-		let movie = {};
-		for (var i = 0; i < lines.length; i++) {
-			if(lines[i] !== '') {
-				var line = lines[i].split(': ');
-				let value = line.slice(1).join(': ');
-				let key = line[0];
-				var keyHash = {
-					'Title': () => {
-						movie.title = value;
-					},
-					'Release Year': () => {
-						movie.year = value;
-					},
-					'Stars': () => {
-						movie.actors = value.split(', ').map(data => {
-							let actor = data.split(' ');
-							return {
-								name: actor[0],
-								surname: actor[1]
-							};
-						});	
-					}
-				}
-				if (keyHash[key]) {
-					keyHash[key]();
-				}
-			} else {
-				if (movie.title !== undefined) {
+		let block = [];
+		for (let i = 0; i < lines.length; i++) {
+			if (/\S/.test(lines[i])) { //if string is not empty or whitespaced
+				block.push(lines[i]);
+			} else if (block.length !== 0) {
+				let movie = this.parseMovie(block);
+				if (validator.isMovieValid(movie)) {
 					movies.push(movie);
-					movie = {};
 				}
-				
+				block = [];
 			}
-			
 		}
 		return movies;
 	}
+				
 
-	parseKeyValue(line) {
+	parseMovie(block) {
+		let title = '';
+		let year = '';
+		let format = '';
+		let actors = [];
+
+		let keyHash = {
+			'title': (val) => {
+				title = val;				
+			},
+			'release year': (val) => {
+				year = val;	
+			},
+			'format': (val) => {
+				format = val;
+			},
+			'stars': (val) => {
+				actors = val.split(', ').map(data => {
+					let actor = data.split(' ');
+					let name = actor[0];
+					let surname = actor.slice(1).join(' ');
+					return {
+						name: name,
+						surname: surname
+					};
+				});	
+			}
+		}		
+
+		for (var i = 0; i < 4; i++) {
+			let value = this.getValue(block[i]);
+			let key = this.getKey(block[i]);
+			if (keyHash[key.toLowerCase()]) {
+				keyHash[key.toLowerCase()](value);
+			}
+		}
+
+		return {
+			title: title,
+			year: year,
+			format: format,
+			actors: actors
+		};
 
 	}
 
-	
+	getKey(line) {
+		return line.split(': ')[0];
+	}
+
+	getValue(line) {
+		return line.split(': ').slice(1).join(': ');
+	}
 
 }
 

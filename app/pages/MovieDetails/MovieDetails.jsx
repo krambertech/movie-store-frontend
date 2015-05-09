@@ -4,7 +4,6 @@ let React = require('react');
 let FluxMixin = require('fluxxor').FluxMixin(React);
 let StoreWatchMixin = require('fluxxor').StoreWatchMixin;
 let ReactRouter = require('react-router');
-let {RouteHandler} = ReactRouter;
 let mui = require('material-ui');
 let Paper = mui.Paper;
 let TopBar = require('./../../components/TopBar/TopBar.jsx');
@@ -31,10 +30,10 @@ let MovieDetails = React.createClass({
 	},
 
 	getActors() {
-		var actors = this.state.movie.actors || []
+		var actors = this.state.movie.actors || [];
 		return actors.map((item, i) => {
 			let divider = (i == actors.length - 1) ? '.' : ',';
-			return <span>{item.name} {item.surname}{divider} </span>
+			return <span>{item.name} {item.surname}{divider} </span>;
 		});
 	},
 

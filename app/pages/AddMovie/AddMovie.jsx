@@ -27,8 +27,7 @@ let AddMovie = React.createClass({
 	},
 
 	render() {
-		return <div className="add-movie">
-					
+		return <div className="add-movie">					
 					<AddMovieForm 
 						goBack={this.goToMoviesPage}
 						movie={{}}

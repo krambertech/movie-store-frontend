@@ -14,7 +14,7 @@ let FloatingButtonSave = React.createClass({
 
 	render() {
 
-		return  <FloatingActionButton className="floating-button-save" iconClassName="muidocs-icon-action-home" onClick={this.onFloatingButtonClick}>
+		return  <FloatingActionButton className="floating-button-save" onClick={this.onFloatingButtonClick}>
 					<i className="fa fa-save"></i>
 				 </FloatingActionButton>;
 	}

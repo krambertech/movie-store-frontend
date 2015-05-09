@@ -3,15 +3,12 @@
 let React = require('react');
 
 let MoviePreview      = require("./../../components/MoviePreview/MoviePreview.jsx");
-let AddMovieBlock     = require("./../../components/AddMovieBlock/AddMovieBlock.jsx");
-let AddMovieForm      = require("./../../components/AddMovieForm/AddMovieForm.jsx");
 let FloatingButtonAdd = require('./../../components/FloatingButtonAdd/FloatingButtonAdd.jsx');
 let MoviesToolbar     = require('./../../components/MoviesToolbar/MoviesToolbar.jsx');
 
 let FluxMixin       = require('fluxxor').FluxMixin(React);
 let StoreWatchMixin = require('fluxxor').StoreWatchMixin;
 let ReactRouter     = require('react-router');
-let {RouteHandler}  = ReactRouter;
 
 
 require('./Movies.less');

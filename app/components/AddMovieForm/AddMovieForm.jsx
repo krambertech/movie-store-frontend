@@ -1,10 +1,8 @@
 'use strict';
 
 let React = require('react');
-let FluxMixin = require('fluxxor').FluxMixin(React);
 let mui = require('material-ui');
 let TextField = mui.TextField;
-let RaisedButton = mui.RaisedButton;
 let DropDownMenu = mui.DropDownMenu;
 let Paper = mui.Paper;
 

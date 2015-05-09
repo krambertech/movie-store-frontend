@@ -1,7 +1,6 @@
 'use strict';
 
 let React = require('react/addons');
-let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 let mui = require('material-ui');
 let FloatingActionButton = mui.FloatingActionButton;
 
@@ -15,7 +14,7 @@ let FloatingButtonAdd = React.createClass({
 
 	render() {
 
-		return  <FloatingActionButton key={name} className="floating-button-add" iconClassName="muidocs-icon-action-home" onClick={this.props.onClick}>
+		return  <FloatingActionButton key={name} className="floating-button-add" onClick={this.props.onClick}>
 					<i className="fa fa-plus"></i>
 				</FloatingActionButton>;
 	}

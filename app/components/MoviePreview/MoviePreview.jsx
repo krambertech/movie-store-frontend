@@ -2,9 +2,7 @@
 
 let React    = require('react');
 let mui      = require('material-ui');
-let classSet = require('classset');
 let Paper    = mui.Paper;
-let FlatButton    = mui.FlatButton;
 
 
 require('./MoviePreview.less');
@@ -18,7 +16,7 @@ let MoviePreview = React.createClass({
 	displayActors() {
 		return this.props.movie.actors.map(actor => {
 			return <span>{actor.name} {actor.surname}, </span>;
-		})
+		});
 	},
 
 	deleteItem() {
@@ -27,7 +25,6 @@ let MoviePreview = React.createClass({
 	},
 
 	render() {
-		let linkTo = "/movies/"+this.props.movie._id;
 		return  <Paper zDepth={1} className="movie-preview" >
 					<div className="heading">
 						<h3> {this.props.movie.title} </h3>
