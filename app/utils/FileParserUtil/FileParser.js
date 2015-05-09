@@ -86,8 +86,8 @@ class FileParser {
 		}		
 
 		for (var i = 0; i < 4; i++) {
-			let value = this.getValue(block[i]);
-			let key = this.getKey(block[i]);
+			let value = this.getValue(block[i]) || '';
+			let key = this.getKey(block[i]) || '';
 			if (keyHash[key.toLowerCase()]) {
 				keyHash[key.toLowerCase()](value);
 			}
@@ -103,11 +103,11 @@ class FileParser {
 	}
 
 	getKey(line) {
-		return line.split(': ')[0];
+		return line && line.length && line.split(': ')[0];
 	}
 
 	getValue(line) {
-		return line.split(': ').slice(1).join(': ');
+		return line && line.length && line.split(': ').slice(1).join(': ');
 	}
 
 }

@@ -26,6 +26,12 @@ let Movies = React.createClass({
 		};
 	},
 
+	getInitialState() {
+        return {
+            inverse: false
+        };
+    },
+
 	componentDidMount() {
 		this.getFlux().actions.movieActions.loadMovies();
 	},
@@ -57,11 +63,8 @@ let Movies = React.createClass({
 	},
 
 	sortMoviesAZ() {
-		console.log('sortMoviesAZ');
-		this.setState({
-			movies: this.getFlux().store('movieStore').sortMoviesAlpha()
-		});
-		
+		this.getFlux().actions.movieActions.sortMoviesAZ(this.state.inverse);
+        this.state.inverse = !this.state.inverse;		
 	},
 
 	render() {

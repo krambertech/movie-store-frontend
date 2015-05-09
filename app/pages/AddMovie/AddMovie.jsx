@@ -3,6 +3,7 @@
 let React         = require('react');
 let ReactRouter = require('react-router');
 let FluxMixin = require('fluxxor').FluxMixin(React);
+let StoreWatchMixin = require('fluxxor').StoreWatchMixin;
 
 let AddMovieForm = require('./../../components/AddMovieForm/AddMovieForm.jsx');
 
@@ -12,11 +13,12 @@ require('./AddMovie.less');
 let AddMovie = React.createClass({
 
 	mixins: [FluxMixin,
-			 ReactRouter.Navigation],
+			 ReactRouter.Navigation,
+			 StoreWatchMixin('movieStore')],
 
 	getStateFromFlux(){
 		return {
-			loadMessage: this.getFlux().store('movieStore').getLoadMsg()
+			loadMessage: this.getFlux().store('movieStore').getLoadMessage()
 		};
 	},
 
@@ -33,15 +35,14 @@ let AddMovie = React.createClass({
 	},
 
 	render() {
-		console.log('loadMessage', this.loadMessage);
 		return <div className="add-movie">					
 					<AddMovieForm 
 						goBack={this.goToMoviesPage}
 						movie={{}}
 						editing={false} 
 						onSubmit={this.handleFormSubmit}
-						onFileInput={this.handleImportFromFile}/>
-					
+						onFileInput={this.handleImportFromFile}
+						fileLoadMessage={this.state.loadMessage}/>					
 			   </div>;
 	}
 });

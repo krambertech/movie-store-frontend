@@ -12,12 +12,18 @@ let SearchBox = React.createClass({
              ReactRouter.Navigation,
              ReactRouter.State],
 
+    getInitialState(){
+        return {
+            searchingMovies: true
+        };
+    },
+
 	inizializeQuerySearch() {
         let self = this;
-        let baseUrl = 'http://127.0.0.1:9125/search/';
+        let baseUrl = (this.state.searchingMovies) ? 'http://127.0.0.1:9125/movies/' : 'http://127.0.0.1:9125/actors/';
 
       
-        var states = new Bloodhound({
+        var movies = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             remote: {
@@ -26,11 +32,22 @@ let SearchBox = React.createClass({
                     return baseUrl + self.getTypeAheadQuery();
                 },
                 filter: (data) => {
-                	var searchQuery = data.map((movie) => { 
-                		return {
-                			value: movie.title
-                		};
-                	});
+                    var searchQuery = [];
+
+                	data.forEach((movie) => { 
+                        if  (this.state.searchingMovies) {
+                    		searchQuery.push({
+                    			value: movie.title
+                    		});
+                        } else {
+                            movie.actors.forEach(actor => {
+                                searchQuery.push({
+                                    value: actor.name + ' ' + actor.surname
+                                });
+                            });
+                        }
+                    });
+
                 	self.getFlux().actions.movieActions.searchMovies(data);
                     return searchQuery;
                 }
@@ -39,7 +56,7 @@ let SearchBox = React.createClass({
 
         let $autocompleteSelect = $('.typeahead');
 
-        states.initialize();
+        movies.initialize();
 
         let basicParameters = {
             hint: true,
@@ -48,16 +65,13 @@ let SearchBox = React.createClass({
         };
 
         $autocompleteSelect.typeahead(basicParameters, {
-            name: 'states',
+            name: 'movies',
             displayKey: 'value',
-            source: states.ttAdapter()
+            source: movies.ttAdapter()
         }).on('keyup', () => {
            if (this.getTypeAheadQuery() === '') {
                 self.getFlux().actions.movieActions.searchMoviesEnd();
-           }
-            
-        }).on('unfocus', () => {
-            this.addClass('hidden');
+           }    
         });
     },
 
@@ -79,10 +93,24 @@ let SearchBox = React.createClass({
         $('.typeahead.tt-input').focus();
     },
 
+    caretClick(){
+
+    },
+
+    changeSearchType() {
+        this.state.searchingMovies = !this.state.searchingMovies;
+        $('.typeahead').typeahead('destroy');
+        this.inizializeQuerySearch();
+    },
+
 	render() {
 		return  <div className="search-box">
 					<input className="typeahead hidden" type="text" placeholder="Search"/>
 					<i className="fa fa-search" onClick={this.searchClick}></i>
+                    <select id="select-type-search" onChange={this.changeSearchType}>
+                        <option>Search in movies</option>
+                        <option>Search in actors</option>
+                    </select>
 				</div>;
 	}
 });

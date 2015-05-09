@@ -14,7 +14,8 @@ let MovieStore = Fluxxor.createStore({
 						 Constants.SERVER.SEARCH_MOVIES, this.handleSearchMovies,
 						 Constants.SERVER.SEARCH_END, this.handleSearchEnd,
 						 Constants.SERVER.GET_MOVIE, this.handleMovieDetails,
-						 Constants.SERVER.LOAD_MSG, this.handleLoadMsg);
+						 Constants.SERVER.LOAD_MSG, this.handleLoadMsg,
+						 Constants.UI.SORT_MOVIES, this.handleSortMovies);
 	},
 
 	handleSearchEnd() {
@@ -58,21 +59,26 @@ let MovieStore = Fluxxor.createStore({
 	},
 
 	_comparatorAZ(a, b) {
-		return (a.title > b.title);
+		if(a.title < b.title) return -1;
+        if(a.title > b.title) return 1;
+        return 0;
 	},
 
-	sortMoviesAlpha() {
-		console.log('sort1', this.movies);
-		if (this.searchMovies) {
-			this.searchMovies.sort(this._comparatorAZ);
-			return this.searchMovies;
-		} else {
-			this.movies.sort(this._comparatorAZ);
-			console.log('sort2', this.movies);
-			return this.movies;
-		}
-		console.log('sort2', this.movies);
-	}
+	_comparatorZA(a, b) {
+        if(a.title > b.title) return -1;
+        if(a.title < b.title) return 1;
+        return 0;
+    },
+
+	handleSortMovies(inverse) {
+        let compare = inverse ? this._comparatorZA : this._comparatorAZ;
+        if (this.searchMovies) {
+            this.searchMovies.sort(compare);
+        } else {
+            this.movies.sort(compare);
+        }
+        this.emit('change');
+    }
 	
 });
 

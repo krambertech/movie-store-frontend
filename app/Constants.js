@@ -7,5 +7,9 @@ module.exports = {
 		'SEARCH_END' : 'SERVER_SEARCH_END',
 		'GET_MOVIE' : 'SERVER_GET_MOVIE',
 		'LOAD_MSG' : 'SERVER_LOAD_MSG'
-	}
+	},
+    UI: {
+        'SORT_MOVIES': 'UI_SORT_MOVIES'
+    }
+
 };

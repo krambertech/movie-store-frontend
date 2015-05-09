@@ -21,20 +21,9 @@ let MovieForm = React.createClass({
 			format: 'DVD',
 			actors: []
 		};
-		/*let movieId = 0;
-		if (this.props.movieId === undefined) {   //TODO
-			movie = {
-				title: this.props.movie.title || '',
-				year: this.props.movie.title || '',
-				format: this.props.movie.title || 'DVD',
-				actors: this.props.movie.actors || []
-			};
-
-		}*/
 
 		return {
 			movie: movie,
-			//movieId: movieId,
 			yearInputError: '',
 			titleInputError: ''
 		};
@@ -110,8 +99,13 @@ let MovieForm = React.createClass({
 		});
 	},
 
-
-
+	getLoadMessage() {
+		if (this.props.fileLoadMessage !== '') {
+			return <p className="load-message"> {this.props.fileLoadMessage} </p>;
+		} else {
+			return '';
+		}
+	},
 
 	render() {
 
@@ -119,6 +113,8 @@ let MovieForm = React.createClass({
 		   { payload: '1', text: 'DVD' },
 		   { payload: '2', text: 'VHS' },
 		   { payload: '3', text: 'Blu-Ray' }];
+
+		let loadMessage = this.getLoadMessage();
 
 
 		return  <Paper zDepth={1} className="add-movie-form-container">
@@ -168,12 +164,14 @@ let MovieForm = React.createClass({
 						  handleActorAdd={this.handleActorAdd} 
 						  actors={this.state.movie.actors}/>
 
-						<p className="file-input">or 
+						<p className="file-input">or    
 						<input type="file" 
 							   name="inputMovieFile"
+							   accept=".txt"
                                ref="fileToImport"
                                onChange={this.props.onFileInput} /> </p>
 
+                        {loadMessage}
 
 						<FloatingButtonSave />
 

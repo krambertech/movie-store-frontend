@@ -6,7 +6,6 @@ class Api {
 	}
 
 	get() {
-		console.log('GET');
 		let deferred = $.Deferred();
 		$.ajax({
             type: 'GET',
@@ -23,7 +22,6 @@ class Api {
 	}
 
     addNewMovie(movie) {
-        console.log('POST', movie);
         let deferred = $.Deferred();
         $.ajax({
             type: 'POST',
@@ -43,7 +41,6 @@ class Api {
     }
 
     getMovieById(id) {
-        console.debug('api.getMovieById',id);
         let deferred = $.Deferred();
         $.ajax({
             type: 'GET',
@@ -63,7 +60,6 @@ class Api {
     }
 
     deleteMovie(id) {
-        console.log('POST delete', id);
         let deferred = $.Deferred();
         $.ajax({
             type: 'POST',

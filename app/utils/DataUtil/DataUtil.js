@@ -15,12 +15,10 @@ class DataUtil {
 	}
 
 	getMovieById(id) {
-		console.debug('dataService.getMovieById',id);
 		return this.api.getMovieById(id);
 	}
 
 	deleteMovie(id){
-		console.debug('dataService.deleteMovie',id);
 		return this.api.deleteMovie(id);
 	}
 

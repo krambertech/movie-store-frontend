@@ -9,7 +9,6 @@ let fileParser = require('../utils/FileParserUtil/');
 
 module.exports = {
 	loadMovies() {
-		console.debug('loading');
 		dataUtil.loadMovies().then((data) => {
 			this.dispatch(Constants.SERVER.MOVIE_LIST, data);
 		});
@@ -30,26 +29,35 @@ module.exports = {
 	},
 
 	addNewMovie(movie) {
-		dataUtil.addNewMovie(movie).then((data) => {
-			console.log('actions', data);
+		dataUtil.addNewMovie(movie).then(() => {
 			this.flux.actions.movieActions.loadMovies();
 		});
 	},
 
 	deleteMovie(id) {
-		dataUtil.deleteMovie(id).then((data) => {
-			console.log('actions', data);
+		dataUtil.deleteMovie(id).then(() => {
 			this.flux.actions.movieActions.loadMovies();
 		});
 	},
 
 	loadMoviesFromFile(data) {
 		fileParser.parseFile(data).then(data => {
+			let counter = 0;
 			data.result.forEach(movie => {
-				this.flux.actions.movieActions.addNewMovie(movie);
-			}, (msg) => {
-				this.dispatch(Constants.SERVER.LOAD_MSG, msg);
+				if (movie.title) {
+					counter++;
+					this.flux.actions.movieActions.addNewMovie(movie);
+				}			
 			});
+
+			this.dispatch(Constants.SERVER.LOAD_MSG, counter + " movies were added");
+
+		}, (msg) => {
+			this.dispatch(Constants.SERVER.LOAD_MSG, msg);
 		});
-	}
+	},
+
+    sortMoviesAZ(inverse) {
+        this.dispatch(Constants.UI.SORT_MOVIES, inverse);
+    }
 };
