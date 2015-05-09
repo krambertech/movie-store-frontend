@@ -5,14 +5,22 @@ let validator = require('./../ValidationUtil/');
 class FileParser {
 	
 	constructor() {
-		
+		this.errorCode = 'All data from file is uploaded';
 	}
 
 	parseFile(file) {
 		let deferred = $.Deferred();
 		this.getTextFromFile(file).then(text => {
 			let result = this.parse(text);
-			deferred.resolve(result);
+			if (result.length === 0) {
+				deferred.reject("Parse error: file is not formatted or empty");
+			} else {
+				deferred.resolve({
+					result: result,
+					message: this.errorCode
+				});
+			}
+			
 		});
 		return deferred.promise();
 	}
@@ -38,6 +46,8 @@ class FileParser {
 				let movie = this.parseMovie(block);
 				if (validator.isMovieValid(movie)) {
 					movies.push(movie);
+				} else {
+					this.errorCode = "Some records were not parsed, check the file formatting";
 				}
 				block = [];
 			}

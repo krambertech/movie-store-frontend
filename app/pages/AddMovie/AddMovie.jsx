@@ -14,6 +14,12 @@ let AddMovie = React.createClass({
 	mixins: [FluxMixin,
 			 ReactRouter.Navigation],
 
+	getStateFromFlux(){
+		return {
+			loadMessage: this.getFlux().store('movieStore').getLoadMsg()
+		};
+	},
+
 	handleFormSubmit(movie) {
 		this.getFlux().actions.movieActions.addNewMovie(movie);
 	},
@@ -27,6 +33,7 @@ let AddMovie = React.createClass({
 	},
 
 	render() {
+		console.log('loadMessage', this.loadMessage);
 		return <div className="add-movie">					
 					<AddMovieForm 
 						goBack={this.goToMoviesPage}

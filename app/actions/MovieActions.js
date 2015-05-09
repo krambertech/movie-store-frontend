@@ -45,8 +45,10 @@ module.exports = {
 
 	loadMoviesFromFile(data) {
 		fileParser.parseFile(data).then(data => {
-			data.forEach(movie => {
+			data.result.forEach(movie => {
 				this.flux.actions.movieActions.addNewMovie(movie);
+			}, (msg) => {
+				this.dispatch(Constants.SERVER.LOAD_MSG, msg);
 			});
 		});
 	}
