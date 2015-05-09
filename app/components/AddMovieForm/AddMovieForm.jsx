@@ -10,6 +10,7 @@ let Paper = mui.Paper;
 
 let FloatingButtonSave = require('./../FloatingButtonSave/FloatingButtonSave.jsx');
 let AddActorsBlock = require('./AddActorsBlock/AddActorsBlock.jsx');
+let TopBar = require('./../TopBar/TopBar.jsx');
 
 require('./AddMovieForm.less');
 
@@ -112,6 +113,8 @@ let MovieForm = React.createClass({
 	},
 
 
+
+
 	render() {
 
 		let menuItems = [  //TODO add prechosen format if editing
@@ -121,6 +124,7 @@ let MovieForm = React.createClass({
 
 
 		return  <Paper zDepth={1} className="add-movie-form-container">
+					<TopBar goBack={this.props.goBack} />
 					<form id="add-movie-form" 
 					  onSubmit={this.handleFormSubmit}>
 						<label className="form-label">

@@ -44,6 +44,23 @@ let MovieStore = Fluxxor.createStore({
 
 	getMovieDetails() {
 		return this.movieDetails;
+	},
+
+	_comparatorAZ(a, b) {
+		return (a.title > b.title);
+	},
+
+	sortMoviesAlpha() {
+		console.log('sort1', this.movies);
+		if (this.searchMovies) {
+			this.searchMovies.sort(this._comparatorAZ);
+			return this.searchMovies;
+		} else {
+			this.movies.sort(this._comparatorAZ);
+			console.log('sort2', this.movies);
+			return this.movies;
+		}
+		console.log('sort2', this.movies);
 	}
 	
 });

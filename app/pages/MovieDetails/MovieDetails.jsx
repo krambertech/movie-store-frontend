@@ -7,6 +7,7 @@ let ReactRouter = require('react-router');
 let {RouteHandler} = ReactRouter;
 let mui = require('material-ui');
 let Paper = mui.Paper;
+let TopBar = require('./../../components/TopBar/TopBar.jsx');
 
 require('./MovieDetails.less');
 
@@ -55,10 +56,7 @@ let MovieDetails = React.createClass({
 		return  <div className="movie-details">
 
 					<Paper className="movie-info">
-						<div className="top-toolbar"> 
-							<div className="go-back" onClick={this.goToMoviesPage}><i className="fa fa-angle-left"> </i> Back </div>
-							<div className="delete" onClick={this.deleteMovie}><i className="fa fa-times"> </i> </div>
-						</div>
+						<TopBar goBack={this.goToMoviesPage} />
 						<h2> {title} </h2>
 						<div className="movie-info-body">
 							<p> <strong>Year of release: </strong>{year} </p>
