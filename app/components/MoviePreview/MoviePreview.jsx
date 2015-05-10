@@ -25,22 +25,13 @@ let MoviePreview = React.createClass({
 		});
 	},
 
-	deleteItem() {
-		this.setState({
-			classes: 'movie-preview movie-deleted'
-		});
-		setTimeout(() => {
-			this.setState({
-				classes: 'movie-preview movie-deleted hidden'
-			});
-			this.props.onDelete(this.props.movie._id);
-		}, 1000);
-		
+	deleteItem() {	
+		this.props.onDelete(this.props.movie._id);		
 	},
 
 	render() {
 
-		return  <Paper zDepth={1} className={this.state.classes} >
+		return  <Paper zDepth={1} className={this.state.classes} ref="movie">
 					<div className="heading">
 						<h3> {this.props.movie.title} </h3>
 					</div>
