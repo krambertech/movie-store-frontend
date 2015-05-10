@@ -61,16 +61,9 @@ let MovieDetails = React.createClass({
 							<p> <strong>Year of release: </strong>{year} </p>
 							<p> <strong>Format: </strong> {this.state.movie.format} </p>
 							<p><strong>Starring: </strong> </p>
-							<p className="actors-list">	
-								{actors}
-
-							</p>
-							
+							<p className="actors-list">	{actors}</p>							
 						</div>
-
 					</Paper>
-
-
 				</div>;
 	}
 });

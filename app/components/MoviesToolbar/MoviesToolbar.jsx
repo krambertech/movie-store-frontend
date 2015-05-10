@@ -8,14 +8,14 @@ require('./MoviesToolbar.less');
 let MoviesToolbar = React.createClass({
 
 	sortIconClick() {
-		$('.fa').toggleClass('hidden');
+		$('.fa-sort').toggleClass('hidden');
 		this.props.onSortAZ();
 	},
 
 	render() {
 		return  <div className="movies-toolbar">
-					<i className="fa fa-sort-alpha-asc" onClick={this.sortIconClick}></i>
-					<i className="fa fa-sort-alpha-desc hidden" onClick={this.sortIconClick}></i>
+					<i className="fa fa-sort fa-sort-alpha-asc" onClick={this.sortIconClick}></i>
+					<i className="fa fa-sort fa-sort-alpha-desc hidden" onClick={this.sortIconClick}></i>
 				</div>;
 	}
 });

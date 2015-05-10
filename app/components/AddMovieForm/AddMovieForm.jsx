@@ -34,17 +34,14 @@ let MovieForm = React.createClass({
 	},
 
 	handleFormSubmit() { 
-		console.log('trying to submit', this.state.movie);
 		if (validator.isMovieValid(this.state.movie)){
-			console.log('trying to submit - valid');
 			this.props.onSubmit(this.state.movie);
 			this.setState({
 				message: 'Form is successfully submitted',
 				status: true
 			});
-			setTimeout(this.clearMovie, 3000);
+			this.clearMovie();
 		} else {
-			console.log('trying to submit - not valid');
 			this.setState({
 				message: 'Some of the fields are invalid, form cannot be submitted',
 				status: false
@@ -128,8 +125,6 @@ let MovieForm = React.createClass({
 
 		let formMessage = this.getFormMessage();
 
-		console.log('formMessage', formMessage);
-
 		return  <Paper zDepth={1} className="add-movie-form-container">
 					<TopBar goBack={this.props.goBack} />
 					{formMessage}
@@ -178,7 +173,7 @@ let MovieForm = React.createClass({
 						  handleActorAdd={this.handleActorAdd} 
 						  actors={this.state.movie.actors}/>
 
-						<p className="file-input">or<i>    </i>    
+						<p className="file-input">or   
 						<input type="file" 
 							   name="inputMovieFile"
 							   accept=".txt"

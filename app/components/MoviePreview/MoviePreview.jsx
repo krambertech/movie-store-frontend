@@ -9,6 +9,12 @@ require('./MoviePreview.less');
 
 let MoviePreview = React.createClass({
 
+	getInitialState() {
+		return {
+			classes: 'movie-preview'
+		};
+	},
+
 	onClick() {
 		this.props.onClick(this.props.movie._id);
 	},
@@ -20,12 +26,21 @@ let MoviePreview = React.createClass({
 	},
 
 	deleteItem() {
-		console.debug('delete');
-		this.props.onDelete(this.props.movie._id);
+		this.setState({
+			classes: 'movie-preview movie-deleted'
+		});
+		setTimeout(() => {
+			this.setState({
+				classes: 'movie-preview movie-deleted hidden'
+			});
+			this.props.onDelete(this.props.movie._id);
+		}, 1000);
+		
 	},
 
 	render() {
-		return  <Paper zDepth={1} className="movie-preview" >
+
+		return  <Paper zDepth={1} className={this.state.classes} >
 					<div className="heading">
 						<h3> {this.props.movie.title} </h3>
 					</div>

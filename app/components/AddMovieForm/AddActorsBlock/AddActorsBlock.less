@@ -1,3 +1,28 @@
+@-webkit-keyframes rotate { 
+    0% { 
+        -webkit-transform-origin: center center; 
+        -webkit-transform: rotate(-200deg); 
+        opacity: 1; 
+    } 
+    100% { 
+        -webkit-transform-origin: center center; 
+        -webkit-transform: rotate(0); 
+        opacity: 1; 
+    } 
+} 
+@keyframes rotate { 
+    0% { 
+        transform-origin: center center; 
+        transform: rotate(-200deg); 
+        opacity: 1; 
+    } 
+    100% { 
+        transform-origin: center center; 
+        transform: rotate(0); 
+        opacity: 1; 
+    } 
+} 
+
 .add-actors-block {
 	li {
 		padding: 0;
@@ -20,6 +45,15 @@
 		position: relative;
 		left: 20px;
 		cursor: pointer;
+	}
+
+	.fa-plus:hover {
+		-webkit-animation-duration: 1s; 
+	    animation-duration: 1s; 
+	    -webkit-animation-fill-mode: both; 
+	    animation-fill-mode: both;
+	    -webkit-animation-name: rotate; 
+    	animation-name: rotate;
 	}
 
 	@media (max-width: 500px) {
