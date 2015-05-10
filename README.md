@@ -2,7 +2,7 @@
 
 ### Installation
 
-1 - Clone the front-end and back-end parts of the project
+1 - Clone the front-end and [back-end](https://github.com/krambertech/movie-store-backend) parts of the project
 
 ```sh
 $ mkdir movie-store
@@ -44,7 +44,7 @@ When you first open the application the database should be empty.
 ##### Adding movies
 
 Let's fill database with initial data. 
-In order to do this, you need click on plus button in the right bottom corner of your screen, you will see the form for adding movies: you can add one by submitting a form or simply by uploading the text file with some movies. 
+In order to do this, you need click on plus button in the right bottom corner of your screen, you will see the form for adding movies: you can add one by submitting a form or simply by uploading the text file with some movies, some examples are in ./movie_files folder
 
 The text file should be formatted like:
 
@@ -82,15 +82,15 @@ In order to change the option you are searching by, click toggle in the right co
 
 ##### General description
 
-The front-end part of the application is written using React framework with Flux and Less. 
+The front-end part of the application is written using [React](http://reactjs.net) framework with [Flux](https://facebook.github.io/flux/) and [Less](http://lesscss.org). 
 
 Technologies used:
-  - react-router library for routing
-  - typeahead for search
-  - Material-UI for some components
-  - webpack for building
+  - [react-router](https://github.com/rackt/react-router) library for routing
+  - [typeahead](https://twitter.github.io/typeahead.js/) for search
+  - [Material-UI](http://callemall.github.io/material-ui/#/) for some components
+  - [webpack](http://webpack.github.io) for building
 
-The back-end part of the application uses mongo and express.js.
+The back-end part of the application uses [mongo](http://www.mongodb.org) and [express.js](http://expressjs.com).
 
 ##### Concepts
 
