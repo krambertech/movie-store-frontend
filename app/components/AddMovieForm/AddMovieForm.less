@@ -1,3 +1,44 @@
+@-webkit-keyframes bounceIn { 
+    0% { 
+        opacity: 0; 
+        -webkit-transform: scale(.3); 
+    } 
+
+    50% { 
+        opacity: 1; 
+        -webkit-transform: scale(1.05); 
+    } 
+
+    70% { 
+        -webkit-transform: scale(.9); 
+    } 
+
+    100% { 
+         -webkit-transform: scale(1); 
+    } 
+} 
+
+@keyframes bounceIn { 
+    0% { 
+        opacity: 0; 
+        transform: scale(.3); 
+    } 
+
+    50% { 
+        opacity: 1; 
+        transform: scale(1.05); 
+    } 
+
+    70% { 
+        transform: scale(.9); 
+    } 
+
+    100% { 
+        transform: scale(1); 
+    } 
+} 
+
+
 .add-movie-form-container {
 	max-width: 700px;
 	min-width: 270px;
@@ -5,6 +46,32 @@
 	margin-right: 20px;
 	background-color: #FAFAFA;
 	min-height: 400px;
+
+	.form-msg {
+		margin: 5px;
+		position: relative;
+		top:7px;
+		font-weight: 700;
+		text-align: center;
+		-webkit-animation-name: bounceIn; 
+    	animation-name: bounceIn; 
+    	-webkit-animation-duration: 1s; 
+    	animation-duration: 1s; 
+    	-webkit-animation-fill-mode: both; 
+    	animation-fill-mode: both; 
+	}
+
+	.form-msg.hidden {
+		display: none;
+	}
+
+	.form-msg.msg-success {
+		color: #009688;
+	}
+
+	.form-msg.msg-error {
+		color: #F44336;
+	}
 
 }
 
@@ -68,6 +135,10 @@
 
 	.file-input {
 		margin-top: 20px;
+
+		input {
+			margin-left: 10px;
+		}
 	}
 
 	

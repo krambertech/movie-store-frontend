@@ -26,14 +26,23 @@ class ValidationUtil {
 	}
 
 	isMovieValid(movie) {
+		console.log('validator ->', movie);
 		let isValid = true;
 		isValid = this.isTitleValid(movie.title) && 
 				  this.isYearValid(movie.year) &&
 				  this.isFormatValid(movie.format);
-		isValid = movie.actors.map((actor) => {
-			return this.isNameValid(actor.name) &&
-			       this.isNameValid(actor.surname);
+		console.log('validator ->', isValid);
+		movie.actors.forEach((actor) => {
+			isValid = this.isNameValid(actor.name) &&
+			       	  this.isNameValid(actor.surname);
 		});
+		console.log('validator ->', isValid);
+		return isValid;
+	}
+
+	isActorValid(actor) {
+		let isValid = this.isNameValid(actor.name) &&
+			       	  this.isNameValid(actor.surname);
 		return isValid;
 	}
 

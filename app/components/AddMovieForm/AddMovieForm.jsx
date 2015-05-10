@@ -10,6 +10,8 @@ let FloatingButtonSave = require('./../FloatingButtonSave/FloatingButtonSave.jsx
 let AddActorsBlock = require('./AddActorsBlock/AddActorsBlock.jsx');
 let TopBar = require('./../TopBar/TopBar.jsx');
 
+let validator = require('./../../utils/ValidationUtil/');
+
 require('./AddMovieForm.less');
 
 let MovieForm = React.createClass({
@@ -24,44 +26,29 @@ let MovieForm = React.createClass({
 
 		return {
 			movie: movie,
+			message: '',
+			status: false,
 			yearInputError: '',
 			titleInputError: ''
 		};
 	},
 
-
-	validateYear(value) {
-		if ( !Number.isInteger(+value) ) {
-			return 'The field should be numeric';
-		}
-		if ( +value > 2020 ) {
-			return 'The year is too big';
-		}
-
-		return '';
-
-	},
-
-	isValid() {
-		return (this.state.titleInputError === '') && (this.state.yearInputError === '');
-	},
-
-	validateTitle(value) {
-		if(/^[a-zA-Z0-9- ]*$/.test(value) === false) {
-		    return 'The field cannot contain special characters';
-		}
-		if (value.length < 2) {
-			return 'Too short';
-		}
-		if (value.length > 30) {
-			return 'The title is too long';
-		}
-		return '';
-	},
-
 	handleFormSubmit() { 
-		if (this.isValid()){
+		console.log('trying to submit', this.state.movie);
+		if (validator.isMovieValid(this.state.movie)){
+			console.log('trying to submit - valid');
 			this.props.onSubmit(this.state.movie);
+			this.setState({
+				message: 'Form is successfully submitted',
+				status: true
+			});
+			setTimeout(this.clearMovie, 3000);
+		} else {
+			console.log('trying to submit - not valid');
+			this.setState({
+				message: 'Some of the fields are invalid, form cannot be submitted',
+				status: false
+			});
 		}
 	},
 
@@ -78,7 +65,7 @@ let MovieForm = React.createClass({
 		movie.title = e.target.value;
 		this.setState({
 			movie: movie,
-			titleInputError: this.validateTitle(movie.title)
+			titleInputError: (validator.isTitleValid(movie.title)) ? '' : 'Input is not valid'
 		});
 	},
 
@@ -87,7 +74,7 @@ let MovieForm = React.createClass({
 		movie.year = e.target.value;
 		this.setState({
 			movie: movie,
-			yearInputError: this.validateYear(movie.year)
+			yearInputError: (validator.isYearValid(movie.year)) ? '' : 'Input is not valid'
 		});
 	},
 
@@ -107,6 +94,29 @@ let MovieForm = React.createClass({
 		}
 	},
 
+	getFormMessage() {
+		if (this.state.message !== '') {
+			let classes = (this.state.status) ? 'form-msg msg-success' : 'form-msg msg-error';
+			return <p className={classes}> {this.state.message} </p>;
+		}
+		return <p className='form-msg hidden'> </p>;
+	},
+
+	clearMovie() {
+		let movie = {
+			title: '',
+			year: '',
+			format: 'DVD',
+			actors: []
+		};
+		this.setState({
+			movie: movie,
+			yearInputError: '',
+			titleInputError: ''
+		});
+
+	},
+
 	render() {
 
 		let menuItems = [  //TODO add prechosen format if editing
@@ -116,9 +126,13 @@ let MovieForm = React.createClass({
 
 		let loadMessage = this.getLoadMessage();
 
+		let formMessage = this.getFormMessage();
+
+		console.log('formMessage', formMessage);
 
 		return  <Paper zDepth={1} className="add-movie-form-container">
 					<TopBar goBack={this.props.goBack} />
+					{formMessage}
 					<form id="add-movie-form" 
 					  onSubmit={this.handleFormSubmit}>
 						<label className="form-label">
@@ -164,7 +178,7 @@ let MovieForm = React.createClass({
 						  handleActorAdd={this.handleActorAdd} 
 						  actors={this.state.movie.actors}/>
 
-						<p className="file-input">or    
+						<p className="file-input">or<i>    </i>    
 						<input type="file" 
 							   name="inputMovieFile"
 							   accept=".txt"

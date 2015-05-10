@@ -4,6 +4,8 @@ let React = require('react');
 let mui = require('material-ui');
 let TextField = mui.TextField;
 
+let validator = require('./../../../utils/ValidationUtil/');
+
 require('./AddActorsBlock.less');
 
 let AddActorsBlock = React.createClass({
@@ -19,43 +21,25 @@ let AddActorsBlock = React.createClass({
 	_handleInputNameChange(e) {
 		this.state.newActor.name = e.target.value;
 		this.setState({
-			nameInputError: this.validateName(this.state.newActor.name)
+			nameInputError: (validator.isNameValid(this.state.newActor.name)) ? '' : 'Field is not valid'
 		});
 	},
 
 	_handleInputSurnameChange(e) {
 		this.state.newActor.surname = e.target.value;
 		this.setState({
-			surnameInputError: this.validateName(this.state.newActor.surname)
+			surnameInputError: (validator.isNameValid(this.state.newActor.surname)) ? '' : 'Field is not valid'
 		});
 	},
 
-	isValid() {
-
-		return (this.state.nameInputError === '') && (this.state.surnameInputError === '');
-	},
-
 	_handleAddActor() {	
-		if(this.isValid()) {
+		if(validator.isActorValid(this.state.newActor)) {
 			this.props.handleActorAdd(this.state.newActor);
 			this.setState({
 				newActor: {}
 			});
 			this.clearInputs();
 		}
-	},
-
-	validateName(value) {
-		if(/^[a-zA-Z0-9- ]*$/.test(value) === false) {
-		    return 'Special characters forbidden';
-		}
-		if (value.length < 2) {
-			return 'Too short';
-		}
-		if (value.length > 30) {
-			return 'Too long';
-		}
-		return '';
 	},
 
 	clearInputs() {
