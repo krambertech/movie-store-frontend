@@ -14,7 +14,7 @@ let MovieStore = Fluxxor.createStore({
 						 Constants.SERVER.SEARCH_MOVIES, this.handleSearchMovies,
 						 Constants.SERVER.SEARCH_END, this.handleSearchEnd,
 						 Constants.SERVER.GET_MOVIE, this.handleMovieDetails,
-						 Constants.SERVER.LOAD_MSG, this.handleLoadMsg,
+						 Constants.UI.LOAD_MSG, this.handleLoadMsg,
 						 Constants.UI.SORT_MOVIES, this.handleSortMovies);
 	},
 

@@ -50,10 +50,10 @@ module.exports = {
 				}			
 			});
 
-			this.dispatch(Constants.SERVER.LOAD_MSG, counter + " movies were added");
+			this.dispatch(Constants.UI.LOAD_MSG, counter + " movies were added");
 
 		}, (msg) => {
-			this.dispatch(Constants.SERVER.LOAD_MSG, msg);
+			this.dispatch(Constants.UI.LOAD_MSG, msg);
 		});
 	},
 

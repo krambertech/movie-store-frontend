@@ -1,5 +1,5 @@
 # Movie store application
----
+
 ### Installation
 
 1 - Clone the front-end and back-end parts of the project
@@ -17,6 +17,7 @@ $ cd movie-store-frontend
 $ npm install
 $ cd ../movie-store-backend
 $ npm install
+```
 
 3 - Run the [mongo](http://www.mongodb.org) database server
 ```sh
@@ -43,9 +44,10 @@ When you first open the application the database should be empty.
 ##### Adding movies
 
 Let's fill database with initial data. 
-In order to do this, you need click on plus button in the right bottom corner of your screen, you will see the form for adding movies: you can add one by submitting a form or simply by uploading the text file. 
+In order to do this, you need click on plus button in the right bottom corner of your screen, you will see the form for adding movies: you can add one by submitting a form or simply by uploading the text file with some movies. 
 
 The text file should be formatted like:
+
 ```
 Title: Blazing Saddles
 Release Year: 1974
@@ -57,3 +59,81 @@ Release Year: 1942
 Format: DVD
 Stars: Humphrey Bogart, Ingrid Bergman, Claude Rains, Peter Lorre
 ```
+
+
+##### Viewing movies added
+
+Now you can view all movies you added by clicking back button. All of them are arranged on the screen in the cards view. You can sort them in descending and ascending order alphabetically by clicking the sort icon in the top right corner.
+
+To delete the movie - press cross icon in the top right corner of the movie
+
+If you want to see detailed information about the movie - press 'Discover more' link. The detailed view of the movie will be opened.
+
+##### Searching
+
+There are 2 options to search by:
+  - Movies
+  - Actor names
+
+In order to change the option you are searching by, click toggle in the right corner of the toolbar. Start typing and see what happens. 
+
+---
+### Archtecture
+
+##### General description
+
+The front-end part of the application is written using React framework with Flux and Less. 
+
+Technologies used:
+  - react-router library for routing
+  - typeahead for search
+  - Material-UI for some components
+  - webpack for building
+
+The back-end part of the application uses mongo and express.js.
+
+##### Concepts
+
+Application is divided into independent components and pages. 
+
+Pages are directly included in routes, they consist of other components, manage all the actions and communicate directly to Flux. Components get all data from page and represent it to user, provide user interactions, but do not communicate with store. 
+
+All data representing by application is contained in stores, which communicate with pages through actions. 
+
+Utils perform all additional functionality, such as handling data, communicatiom with API, parsing file and validation.
+
+##### Structure
+
+- actions
+   - MovieActions - perform actions with movie
+- stores
+   - MovieStore - stores all movies data
+- utils
+   - DataUtil - middle layer between ApiUtil and actions
+   - ApiUtil - communicates with Api
+   - FileParserUtil - parses files with movies uploaded by user
+   - ValidationUtil - validates user input 
+- pages
+   - Root - contains layout of tha page
+   - Movies - page, representing list of movies to user
+   - AddMovie - containes interface for adding new movies
+   - MovieDetails - shows detailed movie view
+- components
+   - Toolbar - top menu bar
+   - Footer
+   - SearchBox
+   - MoviePreview - card with brief information about the movie
+   - MoviesToolbar - toolbar on the Movies page
+   - TopBar 
+   - Floating buttons
+- App 
+- Router
+- Constants
+
+
+
+
+
+
+
+

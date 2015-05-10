@@ -1,0 +1,40 @@
+Title: Pulp Fiction
+Release Year: 1994
+Format: DVD
+Stars: John Travolta, Uma Thurman, Samuel L. Jackson, Amanda Plummer, Tim Roth, Bruce Willis
+
+Title: The Shawshank Redemption
+Release Year: 1994
+Format: VHS
+Stars: Tim Robbins, Morgan Freeman, Bob Gunton
+
+Title: Fight Club
+Release Year: 1999
+Format: VHS
+Stars: Brad Pitt, Edward Norton, Helena Bonham Carter
+
+Title: American History X
+Release Year: 1998
+Format: DVD
+Stars: Edward Norton, Edward Furlong, Beverly Angelo
+
+Title: Django Unchained
+Release Year: 2013
+Format: Blu-ray
+Stars: Jamie Foxx, Christoph Waltz, Leonardo DiCaprio
+
+Title: Amelie
+Release Year: 2001
+Format: VHS
+Stars: Audrey Tautou, Mathieu Kassovitz
+
+Title: Roman Holiday
+Release Year: 1953
+Format: VHS
+Stars: Gregory Peck, Audrey Hepburn, Eddie Albert
+
+Title: Guardians of the Galaxy
+Release Year: 2014
+Format: Blu-ray
+Stars: Chris Pratt, Vin Diesel, Bradley Cooper
+
