@@ -31,7 +31,7 @@ class ValidationUtil {
 				  this.isYearValid(movie.year) &&
 				  this.isFormatValid(movie.format);
 		movie.actors.forEach((actor) => {
-			isValid = this.isNameValid(actor.name) &&
+			isValid = isValid && this.isNameValid(actor.name) &&
 			       	  this.isNameValid(actor.surname);
 		});
 		return isValid;

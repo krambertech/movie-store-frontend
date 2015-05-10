@@ -12,7 +12,10 @@ let AddActorsBlock = React.createClass({
 	
 	getInitialState() {
 		return {
-			newActor: {},
+			newActor: {
+				name: '',
+				surname: ''
+			},
 			nameInputError: '',
 			surnameInputError: ''
 		};
