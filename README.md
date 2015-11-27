@@ -1,5 +1,7 @@
 # Movie store application
 
+Test task for Webbylab 
+
 ### Installation
 
 1 - Clone the front-end and [back-end](https://github.com/krambertech/movie-store-backend) parts of the project
@@ -131,11 +133,3 @@ Utils perform all additional functionality, such as handling data, communicatiom
 - Constants
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=cuH4_IJSk_A" target="_blank"><img src="http://img.youtube.com/vi/cuH4_IJSk_A/0.jpg" alt="Screencast" width="240" height="180" border="10" /></a>
-
-
-
-
-
-
-
-
